@@ -7,15 +7,14 @@ function MainComponent() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const videoUrl = e.target.videoUrl.value;
-    const response = await fetch("transcription-api-endpoint", {
-      method: "POST",
+    const response = await fetch(`https://videosc-api.onrender.com/transcribe/?url=${videoUrl}`, {
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ videoUrl }),
     });
     const data = await response.json();
-    setTranscription(data.transcription);
+    setTranscription(data.full_text);
   };
 
   return (
